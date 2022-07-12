@@ -1,6 +1,3 @@
-# https://github.com/juliankoh/ribbon-discord-bot
-# https://github.com/melenxyz/abracadabra-tvl-bot
-
 import discord
 from discord.ext import tasks
 import os
@@ -22,10 +19,10 @@ client = discord.Client()
 
 async def get_price():
     async with aiohttp.ClientSession() as session:
-        async with session.get(f"https://api.coingecko.com/api/v3/simple/token_price/{CHAIN}?contract_addresses={CONTRACT}&vs_currencies={CURRENCY}") as r:
+        async with session.get(f"https://api.pancakeswap.info/api/v2/tokens/0x5d4eaf65b348be3889193913ef366d306a9fbd73") as r:
             if r.status == 200:
                 js = await r.json()
-                price = js[CONTRACT][CURRENCY]
+                price = js["data"]["price"]
                 pricestring = (f"{NAME}: ${price}")
                 return pricestring
 
